@@ -1,6 +1,10 @@
 # MarginalDivergence.jl
 
-WIP A Bayesian method for Practical Identifiability of differential equation and other models
+A fast, Bayesian method for Practical Identifiability in differential equation and other models. Implemented in Julia.
+
+The methodology is described in the following paper:
+
+Case, Young, & Hébert-Dufresne, "Accurately summarizing an outbreak using epidemiological models takes time." *Royal Society Open Science.* 2023. doi: [10.1098/rsos.230634](https://royalsocietypublishing.org/doi/full/10.1098/rsos.230634)
 
 ## Installation
 
@@ -25,8 +29,8 @@ update MarginalDivergence
 
 ## Dependencies
 
-Currently, getting full use of this package requires use of the unregistered `ConditionalTransform`, which is used to get samples
-from the conditional distribution $P(\theta \mid u)$ for arbitrary $u$. That package is ![here](https://github.com/brendandaisy/ConditionalTransform.jl). 
+Currently, getting full use of this package requires use of the unregistered package `ConditionalTransform.jl`, which is used to get samples
+from the conditional distribution $P(\theta \mid u)$ for arbitrary function of the model parameters $u=f(\theta)$. That package is [here](https://github.com/brendandaisy/ConditionalTransform.jl).
 
 ## Examples
 
@@ -42,7 +46,7 @@ using Parameters
 ### Define the latent process
 
 There are two classes of interfaces: models inheriting from `GenericModel` must simply define a `solve` method, while
-models inheriting from `ODEModel` and `DDEModel`equires implementing at least `timespan` `initial_values` `parameters` and `de_func`, 
+models inheriting from `ODEModel` and `DDEModel` requires implementing at least `timespan` `initial_values` `parameters` and `de_func`, 
 which point to the relavent componenets of DifferentialEquations.jl's implementation. 
 The `solve` method as well as some other helpers are then inherited.
 
